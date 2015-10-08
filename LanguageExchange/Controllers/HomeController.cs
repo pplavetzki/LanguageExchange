@@ -22,11 +22,15 @@ namespace LanguageExchange.Controllers
             byte[] key = Convert.FromBase64String(cipher);
             byte[] hmac = Convert.FromBase64String(hmacKey);
 
-            var encryptor = new Encryptor<AesEngine, Sha256Digest>(Encoding.UTF8, key, hmac);
+            //var encryptor = new Encryptor<AesEngine, Sha256Digest>(Encoding.UTF8, key, hmac);
 
-            ViewBag.OriginalString = "070704115";
-            ViewBag.EncryptedString = encryptor.Encrypt(ViewBag.OriginalString);
-            ViewBag.DecryptedString = encryptor.Decrypt(ViewBag.EncryptedString);
+            ViewBag.OriginalString = "";
+            //ViewBag.EncryptedString = encryptor.Encrypt(ViewBag.OriginalString);
+            //ViewBag.DecryptedString = encryptor.Decrypt(ViewBag.EncryptedString);
+
+            //ViewBag.EncryptedString = AESGCM.SimpleEncrypt(ViewBag.OriginalString, key, hmac);
+            //ViewBag.DecryptedString = AESGCM.SimpleDecrypt("DtQn4vu+Zzl6GjJSpz8IM1+UxDvGkPsSZBsTEcjQ4EdPV+/KkF4p1Z2e3mdhR9UxB0DLp3ddUbggzoOp+Hp43pr0tioBqyE0NCDPm+UNoDmWFCEmXjYnBDRPgNafjqaKZIg5qe/rra/f", key, hmac.Length);
+
 
             return View();
         }
