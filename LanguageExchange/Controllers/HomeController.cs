@@ -24,7 +24,7 @@ namespace LanguageExchange.Controllers
 
             //var encryptor = new Encryptor<AesEngine, Sha256Digest>(Encoding.UTF8, key, hmac);
 
-            ViewBag.OriginalString = "";
+            ViewBag.OriginalString = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             //ViewBag.EncryptedString = encryptor.Encrypt(ViewBag.OriginalString);
             //ViewBag.DecryptedString = encryptor.Decrypt(ViewBag.EncryptedString);
 
