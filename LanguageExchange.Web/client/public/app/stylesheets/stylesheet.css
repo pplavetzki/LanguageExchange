@@ -1,3 +1,33 @@
 body{
 
 }
+
+.login-container {
+    max-width:325px;
+    padding:80px 0;
+}
+
+.login-footer {
+    min-height: 50px;
+}
+
+.login-footer .btn {
+    float: right;
+    height: 31px;
+    margin: 10px 0 0 5px;
+    padding: 0 22px;
+    font: 300 15px/29px 'Open Sans',Helvetica,Arial,sans-serif;
+    cursor: pointer;
+}
+
+.pt10{
+    padding-top:10px;
+}
+
+.pt15{
+    padding-top:15px;
+}
+
+.pt50{
+    padding-top:50px;
+}
