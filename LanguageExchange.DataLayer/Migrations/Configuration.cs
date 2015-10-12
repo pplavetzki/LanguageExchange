@@ -63,19 +63,6 @@ namespace LanguageExchange.DataLayer.Migrations
         //        var createdUser = context.Users.FirstOrDefault(u => u.Firstname == "Paul");
         //        manager.AddToRole(createdUser.Id, "Administrator");
         //    }
-        //}
-    }
-
-    public class UniquePasswordHasher : IPasswordHasher
-    {
-        public string HashPassword(string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword)
-        {
-            throw new NotImplementedException();
         }
     }
 }

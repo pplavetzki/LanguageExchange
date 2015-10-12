@@ -13,7 +13,9 @@ function commonDataService($http){
 
     var service = {
         getCountries:getCountries,
-        getStates:getStates
+        getStates: getStates,
+        getValues: getValues,
+        getValue: getValue
     };
 
     return service;
@@ -42,6 +44,34 @@ function commonDataService($http){
         }
 
         function failed(error){
+            return console.log(error);
+        }
+    }
+
+    function getValues() {
+        return $http.get('http://localhost:49425/api/values')
+            .then(complete)
+            .catch(failed);
+        
+        function complete(response) {
+            return response.data;
+        }
+        
+        function failed(error) {
+            return console.log(error);
+        }
+    }
+
+    function getValue(id) {
+        return $http.get('http://localhost:49425/api/values/' + id)
+            .then(complete)
+            .catch(failed);
+
+        function complete(response) {
+            return response.data;
+        }
+        
+        function failed(error) {
             return console.log(error);
         }
     }

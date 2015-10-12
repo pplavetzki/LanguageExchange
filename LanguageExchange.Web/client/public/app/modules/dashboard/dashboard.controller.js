@@ -6,10 +6,18 @@
 var dashboardModule = require('./index');
 var Dashboard = Dashboard;
 
-Dashboard.$inject = ['$state'];
+Dashboard.$inject = ['$state', 'commonDataService'];
 
-function Dashboard ($state) {
+function Dashboard ($state, commonDataService) {
     var vm = this;
+    
+    commonDataService.getValues().then(function (data) {
+        vm.data = data;
+    });
+    
+    commonDataService.getValue(1).then(function (data) {
+        vm.datum = data;
+    });
 
     vm.gotoAnalysis = function() {
         $state.go('app.workflow');

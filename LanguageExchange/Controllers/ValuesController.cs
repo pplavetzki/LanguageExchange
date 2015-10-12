@@ -4,10 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Thinktecture.IdentityModel.WebApi;
 
 namespace LanguageExchange.Controllers
 {
-    [Authorize]
+    [ResourceAuthorize("View", "All")]
     public class ValuesController : ApiController
     {
         // GET api/values
@@ -17,6 +18,7 @@ namespace LanguageExchange.Controllers
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         public string Get(int id)
         {
             return "value";
