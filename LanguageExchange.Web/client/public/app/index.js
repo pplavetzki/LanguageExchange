@@ -16,7 +16,6 @@ setup.$inject = ['$rootScope', '$location', '$window'];
 
 function setup($rootScope, $location, $window){
 
-    /*
     $rootScope.$on("$locationChangeStart", function (event, next, current) {
         //Do your things
         if("/" == $location.$$path){
@@ -25,7 +24,6 @@ function setup($rootScope, $location, $window){
             }
         }
     });
-    */
 
     $rootScope.$on('$stateChangeSuccess',
         function(event, toState, toParams, fromState, fromParams) {

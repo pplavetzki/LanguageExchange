@@ -255,9 +255,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="Security\AuthServerProvider.cs" />
+    <Compile Include="Security\AppBuilderExtentions.cs" />
+    <Compile Include="Security\AsyncHelper.cs" />
+    <Compile Include="Security\AuthenticationFailureResponse.cs" />
     <Compile Include="Security\ClientAuthenticationFilter.cs" />
+    <Compile Include="Security\IScopeAuthorizationManager.cs" />
     <Compile Include="Security\LanguageExchangeAuthorization.cs" />
+    <Compile Include="Security\ScopeAuthorizationContext.cs" />
+    <Compile Include="Security\ScopeAuthorizationManager.cs" />
+    <Compile Include="Security\ScopeAuthorizationManagerMiddleware.cs" />
+    <Compile Include="Security\ScopeAuthorizationMiddlewareOptions.cs" />
+    <Compile Include="Security\ScopeAuthorizeAttribute.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -346,7 +354,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49425</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

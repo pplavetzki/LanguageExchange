@@ -1,3 +1,26 @@
-<div>
-    login page
+<div class="container login-container">
+    <div class="text-center">
+        <form name="loginform" class="smart-form">
+            <h1>SAMPLE LOGIN APPLICATION</h1>
+            <label class="input pt50">
+                <input type="text" class="input-lg" maxlength="200" placeholder="Username" />
+            </label>
+            <label class="input pt10">
+                <input type="password" class="input-lg" maxlength="200" placeholder="Password" />
+            </label>
+            <div class="login-footer pt15">
+                <button ng-click="vm.submit();" type="submit" class="btn btn-primary">Login</button>
+                <button type="button" class="btn btn-default">Cancel</button>
+            </div>
+            <p class="pt50">
+                <a href="javascript:(0);">Forgot Your Password?</a>
+            </p>
+            <p class="pt10">
+                Create a new Account or take a Test Drive
+            </p>
+            <p class="pt10">
+                Single Sign On
+            </p>
+        </form>
+    </div>
 </div>

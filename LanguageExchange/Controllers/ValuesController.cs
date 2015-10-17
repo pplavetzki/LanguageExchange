@@ -1,14 +1,15 @@
-﻿using System;
+﻿using LanguageExchange.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Thinktecture.IdentityModel.WebApi;
 
 namespace LanguageExchange.Controllers
 {
-    [ResourceAuthorize("View", "All")]
+    //[ResourceAuthorize("access", "full", "read", "any")]
+    [ScopeAuthorize("full", "read", "any")]
     public class ValuesController : ApiController
     {
         // GET api/values
