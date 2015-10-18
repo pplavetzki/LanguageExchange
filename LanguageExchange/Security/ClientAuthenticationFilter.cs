@@ -10,9 +10,18 @@ using System.Web.Http.Filters;
 using System.Web.Http;
 using System.Security.Principal;
 using System.Security.Claims;
+using System.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace LanguageExchange.Security
 {
+    public struct ValidateResult
+    {
+        public string Type { get; set; }
+        public string Value { get; set; }
+    }
+
     public class ClientAuthenticationFilter : Attribute, IAuthenticationFilter, IFilter
     {
         public bool AllowMultiple
@@ -21,6 +30,33 @@ namespace LanguageExchange.Security
             {
                 throw new NotImplementedException();
             }
+        }
+
+        private async Task<IEnumerable<Claim>> ValidateToken(string token)
+        {
+            HttpClient clientRequest = new HttpClient();
+            clientRequest.BaseAddress = new Uri("http://localhost:10100/");
+
+            clientRequest.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var response = clientRequest.PostAsJsonAsync("authorize/verify", token).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            ValidateResult result = JsonConvert.DeserializeObject<ValidateResult>(content);
+
+            var claim = new Claim(result.Type, result.Value);
+            List<Claim> claims = new List<Claim>(1);
+
+            claims.Add(claim);
+
+            return claims;
+
         }
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
@@ -49,10 +85,7 @@ namespace LanguageExchange.Security
                 return;
             }
 
-            var claimsList = new List<Claim>()
-            {
-                new Claim("access", "full")
-            };
+            var claimsList = await ValidateToken(authorization.Parameter);
 
             ClaimsIdentity ident = new ClaimsIdentity(claimsList);
             IPrincipal principal = new ClaimsPrincipal(ident);

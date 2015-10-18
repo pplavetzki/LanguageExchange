@@ -5,16 +5,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Thinktecture.IdentityModel.WebApi;
 
 namespace LanguageExchange.Controllers
 {
     //[ResourceAuthorize("access", "full", "read", "any")]
-    [ScopeAuthorize("full", "read", "any")]
+    [Security.ScopeAuthorize("full", "read", "any")]
     public class ValuesController : ApiController
     {
         // GET api/values
         public IEnumerable<string> Get()
         {
+            Request.CheckAccess("view", "Values");
             return new string[] { "value1", "value2" };
         }
 
