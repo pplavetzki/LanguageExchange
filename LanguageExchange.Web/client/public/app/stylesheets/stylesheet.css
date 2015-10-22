@@ -223,6 +223,13 @@ a {
 .button.blue {
     background-color: #26C6DA;
     color: #fff;
+    border: #26C6DA solid 1px;
+}
+
+.button.white {
+    background-color: #fff;
+    color: #333 !important;
+    border: #ccc solid 1px;
 }
 
 .button {
