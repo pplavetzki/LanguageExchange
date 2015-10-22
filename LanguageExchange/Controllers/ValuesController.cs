@@ -16,7 +16,6 @@ namespace LanguageExchange.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            Request.CheckAccess("view", "Values");
             return new string[] { "value1", "value2" };
         }
 

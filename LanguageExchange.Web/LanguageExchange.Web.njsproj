@@ -107,6 +107,7 @@
     <Content Include="client\public\app\modules\core\404.html" />
     <Content Include="client\public\app\modules\dashboard\dashboard.html" />
     <Content Include="client\public\app\modules\layout\shell.html" />
+    <Content Include="client\public\app\modules\layout\top-navi.html" />
     <Content Include="client\public\app\stylesheets\bootstrap.css" />
     <Content Include="client\public\app\stylesheets\bootstrap.css.map" />
     <Content Include="client\public\app\stylesheets\demo.css" />

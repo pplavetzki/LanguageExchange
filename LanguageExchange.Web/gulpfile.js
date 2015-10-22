@@ -69,14 +69,14 @@ gulp.task('views1', [], function () {
     "use strict";
     return gulp.src(config.codeAppHtml)
         // And put it in the dist folder
-        .pipe(minifyHTML())
+        //.pipe(minifyHTML())
         .pipe(gulp.dest(config.clientApp));
 });
 
 gulp.task('views2', [], function(){
     "use strict";
     return gulp.src(['!./client/public/app/*', './client/public/app/**/*.html'])
-        .pipe(minifyHTML())
+        //.pipe(minifyHTML())
         .pipe(gulp.dest(config.viewsDest));
 });
 
