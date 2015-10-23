@@ -9,9 +9,9 @@
 var authModule = require('./index');
 
 function getStates() {
-
+    
     return [{
-        state: 'login',
+            state: 'login',
             config: {
                 url: '/login',
                 views: {
@@ -23,7 +23,20 @@ function getStates() {
                     }
                 }
             }
-        }];
+            },{
+        state: 'registration',
+        config: {
+                url: '/registration',
+                views: {
+                    root: {
+                        templateUrl: 'views/modules/auth/registration.html',
+                        controller: 'Registration',
+                        controllerAs: 'vm',
+                        title: "Registration"
+                    }
+                }
+        }
+    }];
 }
 
 onRun.$inject = ['routeHelper'];
