@@ -11,16 +11,18 @@ namespace LanguageExchange.Models
 {
     public class ApplicationUserManager : UserManager<ApplicationUser, int>
     {
-        public ApplicationUserManager(IApplicationUserStore store) : base(store)
-        {
+        public ApplicationUserManager(IApplicationUserStore store) : base(store) { }
 
+        public ApplicationUserManager(IApplicationUserStore store, IIdentityMessageService messageService) : base(store)
+        {
+            this.EmailService = messageService;
         }
 
         public static ApplicationUserManager Create(
         IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(
-                new ApplicatonUserStore(context.Get<ApplicationDbContext>()));
+                new ApplicatonUserStore(context.Get<ApplicationDbContext>()), context.Get<IIdentityMessageService>());
             // Configure validation logic for usernames 
             manager.UserValidator = new UserValidator<ApplicationUser, int>(manager)
             {
@@ -51,7 +53,7 @@ namespace LanguageExchange.Models
             //        Subject = "Security Code",
             //        BodyFormat = "Your security code is: {0}"
             //    });
-            //manager.EmailService = new EmailService();
+            
             //manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)

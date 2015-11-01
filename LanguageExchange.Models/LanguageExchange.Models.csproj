@@ -91,16 +91,11 @@
     <Compile Include="ApplicationUserStore.cs" />
     <Compile Include="IApplicationUserStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LanguageExchange.Interfaces\LanguageExchange.Interfaces.csproj">
-      <Project>{3e23b3b4-a1cd-452d-83b9-9d4c43824775}</Project>
-      <Name>LanguageExchange.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

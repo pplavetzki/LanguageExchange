@@ -11,6 +11,7 @@ using Owin;
 using LanguageExchange.Providers;
 using LanguageExchange.Models;
 using LanguageExchange.Security;
+using LanguageExchange.Services;
 
 namespace LanguageExchange
 {
@@ -26,7 +27,7 @@ namespace LanguageExchange
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-
+            app.CreatePerOwinContext<MailTrapService>(MailTrapService.Create);
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             //app.UseCookieAuthentication(new CookieAuthenticationOptions());
