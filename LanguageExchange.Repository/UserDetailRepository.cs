@@ -15,8 +15,8 @@ namespace LanguageExchange.Repository
 
         public IQueryable<UserDetail> GetUserDetailDeep()
         {
-            return _objectSet.AsQueryable<UserDetail>().Include(ud => ud.LanguageDetails);
-                                                       
+            //return _objectSet.AsQueryable<UserDetail>().Include(ud => ud.LanguageDetails);
+            throw new NotImplementedException();            
                                                         
         }
     }
