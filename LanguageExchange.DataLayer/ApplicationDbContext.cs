@@ -9,7 +9,7 @@ namespace LanguageExchange.DataLayer
         : base("LanguageExchange.Authenticate")
         {
             Configuration.ProxyCreationEnabled = false;
-            Configuration.LazyLoadingEnabled = false;
+            Configuration.LazyLoadingEnabled = true;
         }
 
         public static ApplicationDbContext Create()

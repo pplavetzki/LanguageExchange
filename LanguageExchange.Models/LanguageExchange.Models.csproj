@@ -89,18 +89,20 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="ApplicationUserStore.cs" />
+    <Compile Include="CommunicationDetail.cs" />
+    <Compile Include="CommunicationMethod.cs" />
+    <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="IApplicationUserStore.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="LanguageDetail.cs" />
+    <Compile Include="LookupCode.cs" />
+    <Compile Include="Proficiency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LanguageExchange.Interfaces\LanguageExchange.Interfaces.csproj">
-      <Project>{3e23b3b4-a1cd-452d-83b9-9d4c43824775}</Project>
-      <Name>LanguageExchange.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

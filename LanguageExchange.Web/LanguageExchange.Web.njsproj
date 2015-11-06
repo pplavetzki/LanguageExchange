@@ -104,6 +104,7 @@
     <Content Include="client\public\app\favicon.ico" />
     <Content Include="client\public\app\index.html" />
     <Content Include="client\public\app\modules\auth\login.html" />
+    <Content Include="client\public\app\modules\auth\registration.html" />
     <Content Include="client\public\app\modules\core\404.html" />
     <Content Include="client\public\app\modules\dashboard\dashboard.html" />
     <Content Include="client\public\app\modules\layout\shell.html" />
@@ -803,6 +804,7 @@
     <Compile Include="client\public\app\modules\auth\auth.routes.js" />
     <Compile Include="client\public\app\modules\auth\index.js" />
     <Compile Include="client\public\app\modules\auth\login.controller.js" />
+    <Compile Include="client\public\app\modules\auth\registration.controller.js" />
     <Compile Include="client\public\app\modules\core\core.routes.js" />
     <Compile Include="client\public\app\modules\core\index.js" />
     <Compile Include="client\public\app\modules\core\route-helper.provider.js" />

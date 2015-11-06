@@ -6,6 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Thinktecture.IdentityModel.WebApi;
+using LanguageExchange.Repository;
+using LanguageExchange.DataLayer;
+using LanguageExchange.Models.Dtos;
+using StackExchange.Redis;
+using System.Threading.Tasks;
 
 namespace LanguageExchange.Controllers
 {
@@ -23,14 +28,31 @@ namespace LanguageExchange.Controllers
         [AllowAnonymous]
         public string Get(int id)
         {
-            return "value";
+            var contxt = new LanguageExchangeContext();
+            var userRepo = new UserDetailRepository(contxt);
+            var userDetails = userRepo.GetUserDetailDeep();
+            var userDetail = userDetails.FirstOrDefault(ud => ud.Username == "pplavetzki");
+
+            return userDetail.Email;
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        [AllowAnonymous]
+        public async Task<IHttpActionResult> Post([FromBody]UserDto value)
         {
-        }
+            if (value.Email != null)
+            {
+                using (ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("10.211.55.65:6379"))
+                {
+                    var redisRepo = new RedisRepository(redis);
+                    await redisRepo.InsertNewUser(value);
+                }
 
+                return Ok();
+            }
+
+            return InternalServerError();
+        }
         // PUT api/values/5
         public void Put(int id, [FromBody]string value)
         {
