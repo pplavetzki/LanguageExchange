@@ -14,6 +14,6 @@ app.all('/*', function(req, res) {
 
 app.listen(4343, function () {
 
-    console.log('Epic Science app rocking!');
+    console.log('Language Exchange app rocking!');
 
 });

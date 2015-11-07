@@ -60,7 +60,7 @@ gulp.task('browserify', function () {
         // Bundle to a single file
         .pipe(concat('bundle.js'))
         /*jshint camelcase: false */
-        .pipe(gulpif(ugly(), uglify({compress:{drop_console:true}})))
+        //.pipe(gulpif(ugly(), uglify({compress:{drop_console:true}})))
         // Output it to our dist folder
         .pipe(gulp.dest(config.clientApp));
 });
@@ -105,17 +105,6 @@ gulp.task('styles', function(){
     return gulp.src(['./client/public/app/stylesheets/*'])
         .pipe(minifyCss())
         .pipe(gulp.dest(config.cssDest));
-});
-
-gulp.task('deploy', function(){
-    "use strict";
-    return gulp.src(config.clientApp + '/**/*.*')
-        .pipe(sftp({
-            host: '52.24.117.144',
-            user: 'ubuntu',
-            remotePath: '/home/ubuntu/webapps/epic/client/build/app',
-            key:'/Users/paul/Desktop/epic.pem'
-        }));
 });
 
 gulp.task('seed-data', [], function(){
