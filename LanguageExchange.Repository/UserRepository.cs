@@ -1,23 +1,14 @@
-﻿using LanguageExchange.Interfaces;
-using LanguageExchange.Models;
+﻿using Microsoft.Azure.Documents.Client;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LanguageExchange.Repository
 {
-    public class UserRepository : BaseRepository<ApplicationUser>
+    public class UserRepository : DocumentRepository
     {
-        private IRegistrationProcess _registrationProcess;
-
-        public UserRepository(DbContext context, IRegistrationProcess regProcess) : base(context)
-        {
-            _registrationProcess = regProcess;
-        }
-
-
+        public UserRepository(DocumentClient clientDb) : base(clientDb) { }
     }
 }
