@@ -9,10 +9,6 @@ namespace LanguageExchange.Models
 
     public partial class LookupCode
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
-
-        [Required]
         [StringLength(15)]
         public string Code { get; set; }
 
@@ -20,7 +16,6 @@ namespace LanguageExchange.Models
         [StringLength(25)]
         public string GroupName { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Value { get; set; }
 

@@ -52,7 +52,7 @@ namespace LanguageExchange.DataLayer.Migrations
                 LockoutEnabled = false,
                 PhoneNumberConfirmed = false,
                 TwoFactorEnabled = false,
-                UserName = "paul@p2the3.com",
+                UserName = "pplavetzki",
                 SocialSecurityNumber = AESGCM.SimpleEncrypt("555555555", key, hmac)
             };
 
@@ -62,6 +62,8 @@ namespace LanguageExchange.DataLayer.Migrations
             {
                 var createdUser = context.Users.FirstOrDefault(u => u.Firstname == "Paul");
                 manager.AddToRole(createdUser.Id, "Administrator");
+
+
             }
         }
     }

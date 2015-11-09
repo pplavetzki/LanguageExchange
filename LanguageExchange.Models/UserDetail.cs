@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LanguageExchange.Models.Dtos;
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,21 @@ namespace LanguageExchange.Models
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public LanguageDetail[] LanguageDetails { get; set; }
+
+        public static explicit operator UserDetail(UserDto userDto)
+        {
+            UserDetail ud = new UserDetail();
+
+            ud.Id = userDto.UserId.ToString();
+            ud.Email = userDto.Email;
+            ud.Firstname = userDto.Firstname;
+            ud.Lastname = userDto.Lastname;
+            ud.Username = userDto.Username;
+
+            ud.LanguageDetails = userDto.LanguageDetails;
+
+            return ud;
+        }
 
     }
 }

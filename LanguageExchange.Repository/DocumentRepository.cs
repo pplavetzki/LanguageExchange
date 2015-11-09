@@ -10,7 +10,7 @@ namespace LanguageExchange.Repository
 {
     public class DocumentRepository
     {
-        private readonly DocumentClient _clientDb;
+        protected readonly DocumentClient _clientDb;
 
         public DocumentRepository(DocumentClient clientDb)
         {

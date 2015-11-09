@@ -17,6 +17,10 @@ using LanguageExchange.Models;
 using LanguageExchange.Providers;
 using LanguageExchange.Results;
 using LanguageExchange.Services;
+using LanguageExchange.Models.Dtos;
+using LanguageExchange.Repository;
+using Microsoft.Azure.Documents.Client;
+using System.Configuration;
 
 namespace LanguageExchange.Controllers
 {
@@ -26,9 +30,14 @@ namespace LanguageExchange.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private readonly DocumentClient _clientDb;
 
         public AccountController()
         {
+            var documentUri = ConfigurationManager.AppSettings["DocumentUri"];
+            var authKey = ConfigurationManager.AppSettings["AuthorizationKey"];
+
+            _clientDb = new DocumentClient(new Uri(documentUri), authKey);
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -323,8 +332,10 @@ namespace LanguageExchange.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(UserDto model)
         {
+            UserRepository repo = new UserRepository(_clientDb);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -336,7 +347,8 @@ namespace LanguageExchange.Controllers
                 Email = model.Email,
                 Firstname = model.Firstname,
                 Lastname = model.Lastname,
-                JoinDate = DateTime.UtcNow
+                JoinDate = DateTime.UtcNow,
+                EmailConfirmed = false
             };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
@@ -345,6 +357,11 @@ namespace LanguageExchange.Controllers
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
+            }
+            else
+            {
+                UserDetail ud = (UserDetail)model;
+                await repo.InsertUser(ud);
             }
 
             await UserManager.EmailService.SendAsync(new IdentityMessage() { Subject = "You've been Registered.", Destination = user.Email });
