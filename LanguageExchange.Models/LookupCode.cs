@@ -9,6 +9,7 @@ namespace LanguageExchange.Models
 
     public partial class LookupCode
     {
+        public int Id { get; set; }
         [StringLength(15)]
         public string Code { get; set; }
 

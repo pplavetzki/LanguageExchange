@@ -26,7 +26,7 @@ namespace LanguageExchange.Models
         {
             UserDetail ud = new UserDetail();
 
-            ud.Id = userDto.UserId.ToString();
+            ud.Id = userDto.Id.ToString();
             ud.Email = userDto.Email;
             ud.Firstname = userDto.Firstname;
             ud.Lastname = userDto.Lastname;

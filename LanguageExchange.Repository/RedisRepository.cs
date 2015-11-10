@@ -24,10 +24,20 @@ namespace LanguageExchange.Repository
         {
             IDatabase db = _redis.GetDatabase();
 
-            string userKey = "user:" + user.UserId.ToString();
+            string userKey = "user:" + user.Id.ToString();
             string userValue = await JsonConvert.SerializeObjectAsync(user);
 
             await db.StringSetAsync(userKey, userValue);
+        }
+
+        public async Task InsertMostRecentUser(MostRecentUserDto user)
+        {
+            IDatabase db = _redis.GetDatabase();
+
+            string userValue = await JsonConvert.SerializeObjectAsync(user);
+
+            await db.ListLeftPushAsync("MostRecent", userValue);
+            await db.ListTrimAsync("MostRecent", 0, 4);
         }
     }
 }

@@ -21,21 +21,26 @@ using LanguageExchange.Models.Dtos;
 using LanguageExchange.Repository;
 using Microsoft.Azure.Documents.Client;
 using System.Configuration;
+using StackExchange.Redis;
 
 namespace LanguageExchange.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
-    public class AccountController : ApiController
+    public class AccountController : ApiController, IDisposable
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private readonly DocumentClient _clientDb;
+        private readonly ConnectionMultiplexer _redis;
 
         public AccountController()
         {
             var documentUri = ConfigurationManager.AppSettings["DocumentUri"];
             var authKey = ConfigurationManager.AppSettings["AuthorizationKey"];
+
+            _redis = ConnectionMultiplexer.Connect("10.211.55.65:6379");
+
 
             _clientDb = new DocumentClient(new Uri(documentUri), authKey);
         }
@@ -335,6 +340,7 @@ namespace LanguageExchange.Controllers
         public async Task<IHttpActionResult> Register(UserDto model)
         {
             UserRepository repo = new UserRepository(_clientDb);
+            RedisRepository redisRepo = new RedisRepository(_redis);
 
             if (!ModelState.IsValid)
             {
@@ -360,8 +366,18 @@ namespace LanguageExchange.Controllers
             }
             else
             {
-                UserDetail ud = (UserDetail)model;
-                await repo.InsertUser(ud);
+                var newUser = await UserManager.FindByEmailAsync(model.Email);
+                
+                if (newUser != null)
+                {
+                    UserManager.AddToRole(newUser.Id, "User");
+                    UserDetail ud = (UserDetail)model;
+                    ud.Id = newUser.Id.ToString();
+
+                    await repo.InsertUser(ud);
+                    MostRecentUserDto rt = (MostRecentUserDto)model;
+                    await redisRepo.InsertMostRecentUser(rt);
+                }
             }
 
             await UserManager.EmailService.SendAsync(new IdentityMessage() { Subject = "You've been Registered.", Destination = user.Email });

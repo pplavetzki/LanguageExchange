@@ -41,6 +41,8 @@ namespace LanguageExchange.DataLayer.Migrations
             context.Roles.Add(applicationRole);
             var createRole = context.Roles.FirstOrDefault(r => r.Name == "Administrator");
 
+            context.Roles.Add(new ApplicationRole() { Name = "User" });
+
             var user = new ApplicationUser()
             {
                 Firstname = "Paul",

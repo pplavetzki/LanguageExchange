@@ -91,6 +91,8 @@
     <Compile Include="ApplicationUserStore.cs" />
     <Compile Include="CommunicationDetail.cs" />
     <Compile Include="CommunicationMethod.cs" />
+    <Compile Include="Dtos\MRLanguageDetailDto.cs" />
+    <Compile Include="Dtos\MostRecentUserDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="IApplicationUserStore.cs" />
     <Compile Include="Language.cs" />
