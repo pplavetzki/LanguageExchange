@@ -29,7 +29,7 @@ namespace LanguageExchange.Models.Dtos
                     Proficiency = ld.Proficiency.Value
                 };
 
-                mr.LanguageDetails[count] = mrld;
+                mr.LanguageDetails[count++] = mrld;
             }
 
             return mr;

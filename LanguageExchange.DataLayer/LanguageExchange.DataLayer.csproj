@@ -92,9 +92,9 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="LanguageExchangeContext.cs" />
-    <Compile Include="Migrations\201511100427595_initial.cs" />
-    <Compile Include="Migrations\201511100427595_initial.Designer.cs">
-      <DependentUpon>201511100427595_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201511100603586_initial.cs" />
+    <Compile Include="Migrations\201511100603586_initial.Designer.cs">
+      <DependentUpon>201511100603586_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AuthConfiguration.cs" />
     <Compile Include="Migrations\DataConfiguration.cs" />
@@ -119,8 +119,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511100427595_initial.resx">
-      <DependentUpon>201511100427595_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511100603586_initial.resx">
+      <DependentUpon>201511100603586_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

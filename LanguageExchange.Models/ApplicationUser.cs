@@ -13,6 +13,8 @@ namespace LanguageExchange.Models
         [Required]
         public DateTime JoinDate { get; set; }
         public string SocialSecurityNumber { get; set; }
+        public string RegisterToken { get; set; }
+        public DateTime? RegisterTokenExpiration { get; set; }
     }
 
     public class ApplicationUserClaim : IdentityUserClaim<int>

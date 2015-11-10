@@ -13,7 +13,7 @@ namespace LanguageExchange.DataLayer.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201511100427595_initial"; }
+            get { return "201511100603586_initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -349,12 +349,14 @@ namespace LanguageExchange.Controllers
 
             var user = new ApplicationUser()
             {
-                UserName = model.Email,
+                UserName = model.Username,
                 Email = model.Email,
                 Firstname = model.Firstname,
                 Lastname = model.Lastname,
                 JoinDate = DateTime.UtcNow,
-                EmailConfirmed = false
+                EmailConfirmed = false,
+                RegisterToken = Guid.NewGuid().ToString(),
+                RegisterTokenExpiration = DateTime.UtcNow.AddDays(1)
             };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);

@@ -39,6 +39,8 @@ namespace LanguageExchange.DataLayer.Migrations
                         Lastname = c.String(nullable: false),
                         JoinDate = c.DateTime(nullable: false),
                         SocialSecurityNumber = c.String(),
+                        RegisterToken = c.String(),
+                        RegisterTokenExpiration = c.DateTime(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
