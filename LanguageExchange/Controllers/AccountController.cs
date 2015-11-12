@@ -32,26 +32,28 @@ namespace LanguageExchange.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private readonly DocumentClient _clientDb;
-        private readonly ConnectionMultiplexer _redis;
+        private readonly IConnectionMultiplexer _redis;
 
-        public AccountController()
+        //public AccountController() { }
+
+        public AccountController(DocumentClient dbClient, IConnectionMultiplexer redis)
         {
-            var documentUri = ConfigurationManager.AppSettings["DocumentUri"];
-            var authKey = ConfigurationManager.AppSettings["AuthorizationKey"];
+            //var documentUri = ConfigurationManager.AppSettings["DocumentUri"];
+            //var authKey = ConfigurationManager.AppSettings["AuthorizationKey"];
 
-            _redis = ConnectionMultiplexer.Connect("10.211.55.65:6379");
+            _redis = redis;
 
 
-            _clientDb = new DocumentClient(new Uri(documentUri), authKey);
+            _clientDb = dbClient;
         }
-
+        /*
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
         }
-
+        */
         public ApplicationUserManager UserManager
         {
             get

@@ -13,9 +13,9 @@ namespace LanguageExchange.Repository
     //this should be a singleton
     public class RedisRepository : IRedisRepository
     {
-        private ConnectionMultiplexer _redis;
+        private IConnectionMultiplexer _redis;
 
-        public RedisRepository(ConnectionMultiplexer redis)
+        public RedisRepository(IConnectionMultiplexer redis)
         {
             _redis = redis;
         }
