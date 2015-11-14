@@ -1,4 +1,5 @@
 using LanguageExchange.Models;
+using LanguageExchange.Security;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Practices.Unity;

@@ -22,6 +22,7 @@ using LanguageExchange.Repository;
 using Microsoft.Azure.Documents.Client;
 using System.Configuration;
 using StackExchange.Redis;
+using LanguageExchange.Security;
 
 namespace LanguageExchange.Controllers
 {
@@ -34,26 +35,12 @@ namespace LanguageExchange.Controllers
         private readonly DocumentClient _clientDb;
         private readonly IConnectionMultiplexer _redis;
 
-        //public AccountController() { }
-
         public AccountController(DocumentClient dbClient, IConnectionMultiplexer redis)
         {
-            //var documentUri = ConfigurationManager.AppSettings["DocumentUri"];
-            //var authKey = ConfigurationManager.AppSettings["AuthorizationKey"];
-
             _redis = redis;
-
-
             _clientDb = dbClient;
         }
-        /*
-        public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
-        {
-            UserManager = userManager;
-            AccessTokenFormat = accessTokenFormat;
-        }
-        */
+
         public ApplicationUserManager UserManager
         {
             get
@@ -355,14 +342,10 @@ namespace LanguageExchange.Controllers
                 Email = model.Email,
                 Firstname = model.Firstname,
                 Lastname = model.Lastname,
-                JoinDate = DateTime.UtcNow,
-                EmailConfirmed = false,
-                RegisterToken = Guid.NewGuid().ToString(),
-                RegisterTokenExpiration = DateTime.UtcNow.AddDays(1)
+                JoinDate = DateTime.UtcNow
             };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-            UserManager.EmailService = MailTrapService.Create();
 
             if (!result.Succeeded)
             {
@@ -370,13 +353,14 @@ namespace LanguageExchange.Controllers
             }
             else
             {
-                var newUser = await UserManager.FindByEmailAsync(model.Email);
-                
-                if (newUser != null)
+                var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var encodedToken = HttpUtility.UrlEncode(code);
+
+                if (!string.IsNullOrEmpty(user.Id))
                 {
-                    UserManager.AddToRole(newUser.Id, "User");
+                    UserManager.AddToRole(user.Id, "User");
                     UserDetail ud = (UserDetail)model;
-                    ud.Id = newUser.Id.ToString();
+                    ud.Id = user.Id;
 
                     await repo.InsertUser(ud);
                     MostRecentUserDto rt = (MostRecentUserDto)model;

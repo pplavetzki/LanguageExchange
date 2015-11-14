@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Thinktecture.IdentityModel.WebApi;
 using LanguageExchange.Repository;
-using LanguageExchange.DataLayer;
+using LanguageExchange.Security;
 using LanguageExchange.Models.Dtos;
 using StackExchange.Redis;
 using System.Threading.Tasks;
@@ -24,17 +24,6 @@ namespace LanguageExchange.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [AllowAnonymous]
-        public string Get(int id)
-        {
-            var contxt = new LanguageExchangeContext();
-            var userRepo = new UserDetailRepository(contxt);
-            var userDetails = userRepo.GetUserDetailDeep();
-            var userDetail = userDetails.FirstOrDefault(ud => ud.Username == "pplavetzki");
-
-            return userDetail.Email;
-        }
 
         // POST api/values
         [AllowAnonymous]

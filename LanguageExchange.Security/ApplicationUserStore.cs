@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace LanguageExchange.Models
+namespace LanguageExchange.Security
 {
     public class ApplicatonUserStore :
-        UserStore<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IApplicationUserStore
+        UserStore<ApplicationUser>, IApplicationUserStore
     {
         public ApplicatonUserStore(ApplicationDbContext context)
             : base(context)

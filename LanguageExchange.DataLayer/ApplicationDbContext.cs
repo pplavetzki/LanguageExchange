@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using LanguageExchange.Models;
 
 namespace LanguageExchange.DataLayer
 {

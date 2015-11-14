@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LanguageExchange.Models
+namespace LanguageExchange.Security
 {
-    public interface IApplicationUserStore : IUserStore<ApplicationUser, int>
+    public interface IApplicationUserStore : IUserStore<ApplicationUser>
     {
 
     }

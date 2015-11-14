@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace LanguageExchange.Models
+namespace LanguageExchange.Security
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
         : base("LanguageExchange.Authenticate")

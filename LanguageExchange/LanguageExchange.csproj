@@ -373,10 +373,6 @@
       <Project>{5e8c616f-f985-4c86-9bd5-cc5de426fb57}</Project>
       <Name>LanguageExchange.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LanguageExchange.DataLayer\LanguageExchange.DataLayer.csproj">
-      <Project>{f7733cdc-5f2b-4f64-86ee-370b0ad8ef69}</Project>
-      <Name>LanguageExchange.DataLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LanguageExchange.Interfaces\LanguageExchange.Interfaces.csproj">
       <Project>{3e23b3b4-a1cd-452d-83b9-9d4c43824775}</Project>
       <Name>LanguageExchange.Interfaces</Name>
@@ -388,6 +384,10 @@
     <ProjectReference Include="..\LanguageExchange.Repository\LanguageExchange.Repository.csproj">
       <Project>{97bf15f7-221b-4f4f-8b23-3bac2e12fe29}</Project>
       <Name>LanguageExchange.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LanguageExchange.Security\LanguageExchange.Security.csproj">
+      <Project>{ddb8d48a-af18-4258-8f62-34d6e3dc211c}</Project>
+      <Name>LanguageExchange.Security</Name>
     </ProjectReference>
     <ProjectReference Include="..\LanguageExchange.Services\LanguageExchange.Services.csproj">
       <Project>{26616096-4389-4dfa-9646-fef3d0c5b6aa}</Project>
