@@ -19,7 +19,7 @@ namespace LanguageExchange.Services
                 EnableSsl = true
             };
 
-            var mailMessage = new MailMessage("registration@pareidoliasw.com", message.Destination, message.Subject, "<b>You've been successfully Registered!</b>");
+            var mailMessage = new MailMessage("registration@pareidoliasw.com", message.Destination, message.Subject, message.Body);
             mailMessage.IsBodyHtml = true;
 
             client.Send(mailMessage);

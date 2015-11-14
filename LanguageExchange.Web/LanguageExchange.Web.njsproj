@@ -84,12 +84,14 @@
     <Content Include="client\public\app\data\states.json" />
     <Content Include="client\public\app\favicon.ico" />
     <Content Include="client\public\app\index.html" />
+    <Content Include="client\public\app\modules\auth\confirmation.html" />
     <Content Include="client\public\app\modules\auth\login.html" />
     <Content Include="client\public\app\modules\auth\registration.html" />
     <Content Include="client\public\app\modules\core\404.html" />
     <Content Include="client\public\app\modules\dashboard\dashboard.html" />
     <Content Include="client\public\app\modules\layout\shell.html" />
     <Content Include="client\public\app\modules\layout\top-navi.html" />
+    <Compile Include="client\public\app\modules\services\auth.services.js" />
     <Content Include="client\public\app\stylesheets\bootstrap.css" />
     <Content Include="client\public\app\stylesheets\bootstrap.css.map" />
     <Content Include="client\public\app\stylesheets\demo.css" />
@@ -782,6 +784,7 @@
     <Compile Include="client\node_modules\lodash\utility\uniqueId.js" />
     <Compile Include="client\public\app\index.js" />
     <Compile Include="client\public\app\modules\auth\auth.routes.js" />
+    <Compile Include="client\public\app\modules\auth\confirmation-controller.js" />
     <Compile Include="client\public\app\modules\auth\index.js" />
     <Compile Include="client\public\app\modules\auth\login.controller.js" />
     <Compile Include="client\public\app\modules\auth\registration.controller.js" />

@@ -10,3 +10,4 @@ module.exports = angular.module('app.auth', ['app.core']);
 require('./auth.routes');
 require('./login.controller');
 require('./registration.controller');
+require('./confirmation-controller')

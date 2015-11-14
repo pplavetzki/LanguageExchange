@@ -23,9 +23,9 @@ function getStates() {
                     }
                 }
             }
-            },{
-        state: 'registration',
-        config: {
+            }, {
+            state: 'registration',
+            config: {
                 url: '/registration',
                 views: {
                     root: {
@@ -35,7 +35,20 @@ function getStates() {
                         title: "Registration"
                     }
                 }
-        }
+            }
+        },{
+            state: 'confirmation',
+            config: {
+                url: '/confirm?userId&code',
+                views: {
+                    root: {
+                        templateUrl: 'views/modules/auth/confirmation.html',
+                        controller: 'Confirmation',
+                        controllerAs: 'vm',
+                        title: "Confirmation"
+                    }
+                }
+            }
     }];
 }
 

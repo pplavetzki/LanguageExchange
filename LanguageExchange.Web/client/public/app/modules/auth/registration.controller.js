@@ -5,7 +5,7 @@ var Registration = Registration;
 
 Registration.$inject = [];
 
-function Registration($timeout, $window, $state, $scope) {
+function Registration() {
     var vm = this;
 
 };

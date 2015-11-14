@@ -78,47 +78,6 @@ namespace LanguageExchange.Controllers
             return Ok();
         }
 
-        // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
-        [Route("ManageInfo")]
-        public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
-        {
-            throw new NotImplementedException();
-            //IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-
-            //if (user == null)
-            //{
-            //    return null;
-            //}
-
-            //List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
-
-            //foreach (IdentityUserLogin linkedAccount in user.Logins)
-            //{
-            //    logins.Add(new UserLoginInfoViewModel
-            //    {
-            //        LoginProvider = linkedAccount.LoginProvider,
-            //        ProviderKey = linkedAccount.ProviderKey
-            //    });
-            //}
-
-            //if (user.PasswordHash != null)
-            //{
-            //    logins.Add(new UserLoginInfoViewModel
-            //    {
-            //        LoginProvider = LocalLoginProvider,
-            //        ProviderKey = user.UserName,
-            //    });
-            //}
-
-            //return new ManageInfoViewModel
-            //{
-            //    LocalLoginProvider = LocalLoginProvider,
-            //    Email = user.UserName,
-            //    Logins = logins,
-            //    ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
-            //};
-        }
-
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
@@ -192,35 +151,6 @@ namespace LanguageExchange.Controllers
         //    {
         //        return GetErrorResult(result);
         //    }
-
-            return Ok();
-        }
-
-        // POST api/Account/RemoveLogin
-        [Route("RemoveLogin")]
-        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
-            //IdentityResult result;
-
-            //if (model.LoginProvider == LocalLoginProvider)
-            //{
-            //    result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
-            //}
-            //else
-            //{
-            //    result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
-            //        new UserLoginInfo(model.LoginProvider, model.ProviderKey));
-            //}
-
-            //if (!result.Succeeded)
-            //{
-            //    return GetErrorResult(result);
-            //}
 
             return Ok();
         }
@@ -323,6 +253,30 @@ namespace LanguageExchange.Controllers
             return logins;
         }
 
+        // GET api/account/confirm
+        [AllowAnonymous]
+        [Route("Confirm", Name = "confirmation")]
+        [HttpGet]
+        public async Task<IHttpActionResult> Confirm(string userId, string code)
+        {
+            if(userId == null || code == null)
+            {
+                return BadRequest("Missing UserId or Token!");
+            }
+
+            var decodedCode = HttpUtility.UrlDecode(code);
+
+            var result = await UserManager.ConfirmEmailAsync(userId, code);
+
+            if(result.Succeeded)
+            {
+                return Ok(new { success = true });
+            }
+
+            return GetErrorResult(result);
+
+        }
+
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
@@ -330,6 +284,7 @@ namespace LanguageExchange.Controllers
         {
             UserRepository repo = new UserRepository(_clientDb);
             RedisRepository redisRepo = new RedisRepository(_redis);
+            string message = "";
 
             if (!ModelState.IsValid)
             {
@@ -356,6 +311,11 @@ namespace LanguageExchange.Controllers
                 var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 var encodedToken = HttpUtility.UrlEncode(code);
 
+                string callback = "http://localhost:9095/confirm?userId={0}&code={1}";
+
+                var url = string.Format(callback, user.Id, encodedToken);
+                message = "Please click this link or paste into a browser: <a href='" + url + "'>" + url + "</a>";
+
                 if (!string.IsNullOrEmpty(user.Id))
                 {
                     UserManager.AddToRole(user.Id, "User");
@@ -368,7 +328,7 @@ namespace LanguageExchange.Controllers
                 }
             }
 
-            await UserManager.EmailService.SendAsync(new IdentityMessage() { Subject = "You've been Registered.", Destination = user.Email });
+            await UserManager.EmailService.SendAsync(new IdentityMessage() { Subject = "You've been Registered.", Destination = user.Email, Body = message });
 
             var ret = new
             {

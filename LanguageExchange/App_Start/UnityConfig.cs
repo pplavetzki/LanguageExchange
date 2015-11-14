@@ -26,8 +26,9 @@ namespace LanguageExchange
 
             // e.g. container.RegisterType<ITestService, TestService>();
             Uri uri = new Uri(documentUri);
-            ConnectionPolicy connectionPolicy = new ConnectionPolicy();
+            ConnectionPolicy connectionPolicy = new ConnectionPolicy() { ConnectionMode = ConnectionMode.Direct, ConnectionProtocol = Protocol.Tcp };
             ConsistencyLevel consistencyLevel = new ConsistencyLevel();
+            consistencyLevel = ConsistencyLevel.Session;
 
             //var dc = new DocumentClient();
             container.RegisterType<IApplicationUserStore, ApplicatonUserStore>();
