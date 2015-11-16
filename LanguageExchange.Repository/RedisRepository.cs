@@ -39,5 +39,25 @@ namespace LanguageExchange.Repository
             await db.ListLeftPushAsync("MostRecent", userValue);
             await db.ListTrimAsync("MostRecent", 0, 4);
         }
+
+        public async Task<string[]> GetLanguages()
+        {
+            IDatabase db = _redis.GetDatabase();
+
+            var languages = await db.ListRangeAsync("languages", 0, -1);
+            var results = Array.ConvertAll<RedisValue, string>(languages, language => (string)language);
+
+            return results;
+        }
+
+        public async Task<string[]> GetCountries()
+        {
+            IDatabase db = _redis.GetDatabase();
+
+            var countries = await db.ListRangeAsync("countries", 0, -1);
+            var results = Array.ConvertAll<RedisValue, string>(countries, country => (string)country);
+
+            return results;
+        }
     }
 }

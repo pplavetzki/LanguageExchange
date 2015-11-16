@@ -18,7 +18,7 @@ function setup($rootScope, $location, $window){
 
     $rootScope.$on("$locationChangeStart", function (event, next, current) {
         //Do your things
-        if("/" == $location.$$path){
+        if("/" != $location.$$path && "/login" != $location.$$path && "/registration" != $location.$$path && "/confirm" != $location.$$path){
             if (!$window.sessionStorage.token || window.sessionStorage.token === "null") {
                 $location.path('/login');
             }

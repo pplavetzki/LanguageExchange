@@ -13,6 +13,11 @@ function Shell($rootScope, $timeout, $window, $state) {
     var vm = this;
 
     vm.logout = logout;
+    vm.click = register;
+    
+    function register() {
+        $state.go('registration');
+    }
 
     function activate(){
         $timeout(function(){

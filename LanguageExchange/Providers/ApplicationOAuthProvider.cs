@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using LanguageExchange.Models;
+using LanguageExchange.Security;
 
 namespace LanguageExchange.Providers
 {
@@ -29,24 +30,30 @@ namespace LanguageExchange.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            //var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            //ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 
-            //if (user == null)
-            //{
-            //    context.SetError("invalid_grant", "The user name or password is incorrect.");
-            //    return;
-            //}
+            if (user == null)
+            { 
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                user = await userManager.FindByNameAsync(context.UserName);
+                if(user != null)
+                {
+                    await userManager.AccessFailedAsync(user.Id);
+                }
 
-            //ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-            //   OAuthDefaults.AuthenticationType);
+                return;
+            }
+            
+            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
+               OAuthDefaults.AuthenticationType);
             //ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
             //    CookieAuthenticationDefaults.AuthenticationType);
 
-            //AuthenticationProperties properties = CreateProperties(user.UserName);
-            //AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
-            //context.Validated(ticket);
+            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            context.Validated(ticket);
             //context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 

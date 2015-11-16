@@ -11,11 +11,12 @@ Dashboard.$inject = ['$state', 'commonDataService'];
 function Dashboard ($state, commonDataService) {
     var vm = this;
     
+    /*  
     commonDataService.getValues().then(function (data) {
         vm.data = data;
     });
     
-    /*
+
     commonDataService.getValue(1).then(function (data) {
         vm.datum = data;
     });
