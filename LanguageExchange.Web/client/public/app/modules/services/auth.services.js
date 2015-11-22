@@ -4,21 +4,36 @@ var servicesModule = require('./index');
 
 var authServices = authServices;
 
-authServices.$inject = ['$http']
+authServices.$inject = ['$http', 'constants']
 
-function authServices($http) {
+function authServices($http, constants) {
 
     var service = {
-    	confirmEmail: confirmEmail
+        confirmEmail: confirmEmail,
+        authorize: authorize
     };
 
     return service;
 
     function confirmEmail(userId, code) {
-    	return $http.get('http://localhost:49425/api/account/confirm?userId=' + userId + '&code=' + encodeURIComponent(code))
+    	return $http.get(constants.apiBaseUrl + 'account/confirm?userId=' + userId + '&code=' + encodeURIComponent(code))
             .then(complete)
             .catch(failed);
 
+        function complete(response) {
+            return response.data;
+        }
+        
+        function failed(error) {
+            return console.log(error);
+        }
+    }
+
+    function authorize() {
+        return $http.get(constants.appBaseUrl + 'auth/scope')
+            .then(complete)
+            .catch(failed);
+        
         function complete(response) {
             return response.data;
         }

@@ -1,4 +1,5 @@
-﻿using LanguageExchange.Models;
+﻿using LanguageExchange.Interfaces;
+using LanguageExchange.Models;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LanguageExchange.Repository
 {
-    public class UserRepository : DocumentRepository
+    public class UserRepository : DocumentRepository, IUserRepository
     {
         public UserRepository(DocumentClient clientDb) : base(clientDb) { }
 

@@ -12,3 +12,4 @@ module.exports = angular.module('app.core', ['ui.router', 'ui.bootstrap']);
 
 require('./core.routes');
 require('./route-helper.provider');
+require('./constants');

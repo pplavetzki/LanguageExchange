@@ -9,12 +9,19 @@
 var authModule = require('./index');
 var Login = Login;
 
-Login.$inject = ['$timeout', '$window', '$state', '$scope'];
+Login.$inject = ['$timeout', '$window', '$state', '$scope', 'authServices'];
 
-function Login ($timeout, $window, $state, $scope) {
+function Login ($timeout, $window, $state, $scope, authServices) {
     var vm = this;
 
     vm.submit = submit;
+    
+    authServices.authorize().then(function (data) {
+        if (data && data.token) {
+            vm.token = data.token;
+            console.log(vm.token);
+        }
+    });
 
     function submit() {
         if($scope.loginform.$valid) {

@@ -1,4 +1,6 @@
+using LanguageExchange.Interfaces;
 using LanguageExchange.Models;
+using LanguageExchange.Repository;
 using LanguageExchange.Security;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
@@ -30,12 +32,14 @@ namespace LanguageExchange
             ConsistencyLevel consistencyLevel = new ConsistencyLevel();
             consistencyLevel = ConsistencyLevel.Session;
 
-            //var dc = new DocumentClient();
             container.RegisterType<IApplicationUserStore, ApplicatonUserStore>();
             container.RegisterType<DocumentClient>(new ContainerControlledLifetimeManager(), new InjectionConstructor(uri, authKey, connectionPolicy, consistencyLevel));
 
             ConnectionMultiplexer connectionMulp = ConnectionMultiplexer.Connect(redisConnection);
             container.RegisterInstance<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnection));
+
+            container.RegisterType<IRedisRepository, RedisRepository>();
+            container.RegisterType<IUserRepository, UserRepository>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

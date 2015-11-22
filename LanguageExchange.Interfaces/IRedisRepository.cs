@@ -10,5 +10,8 @@ namespace LanguageExchange.Interfaces
     public interface IRedisRepository
     {
         Task InsertNewUser(UserDto user);
+        Task InsertMostRecentUser(MostRecentUserDto user);
+        Task<string[]> GetLanguages();
+        Task<string[]> GetCountries();
     }
 }

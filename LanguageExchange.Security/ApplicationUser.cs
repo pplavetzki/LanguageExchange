@@ -16,11 +16,9 @@ namespace LanguageExchange.Security
         [Required]
         public DateTime JoinDate { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager, string authType)
         {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ExternalBearer);
+            var userIdentity = await manager.CreateIdentityAsync(this, authType);
 
             // Add custom user claims here
 

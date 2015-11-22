@@ -23,6 +23,7 @@ using Microsoft.Azure.Documents.Client;
 using System.Configuration;
 using StackExchange.Redis;
 using LanguageExchange.Security;
+using LanguageExchange.Interfaces;
 
 namespace LanguageExchange.Controllers
 {
@@ -32,13 +33,13 @@ namespace LanguageExchange.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-        private readonly DocumentClient _clientDb;
-        private readonly IConnectionMultiplexer _redis;
+        private readonly IUserRepository _userRepository;
+        private readonly IRedisRepository _redis;
 
-        public AccountController(DocumentClient dbClient, IConnectionMultiplexer redis)
+        public AccountController(IUserRepository userRepository, IRedisRepository redis)
         {
             _redis = redis;
-            _clientDb = dbClient;
+            _userRepository = userRepository;
         }
 
         public ApplicationUserManager UserManager
@@ -82,18 +83,18 @@ namespace LanguageExchange.Controllers
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            //IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
-            //    model.NewPassword);
-            
-            //if (!result.Succeeded)
-            //{
-            //    return GetErrorResult(result);
-            //}
+            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+                model.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
 
             return Ok();
         }
@@ -282,8 +283,6 @@ namespace LanguageExchange.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserDto model)
         {
-            UserRepository repo = new UserRepository(_clientDb);
-            RedisRepository redisRepo = new RedisRepository(_redis);
             string message = "";
 
             if (!ModelState.IsValid)
@@ -322,9 +321,9 @@ namespace LanguageExchange.Controllers
                     UserDetail ud = (UserDetail)model;
                     ud.Id = user.Id;
 
-                    await repo.InsertUser(ud);
+                    await _userRepository.InsertUser(ud);
                     MostRecentUserDto rt = (MostRecentUserDto)model;
-                    await redisRepo.InsertMostRecentUser(rt);
+                    await _redis.InsertMostRecentUser(rt);
                 }
             }
 

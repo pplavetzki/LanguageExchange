@@ -91,6 +91,7 @@
     <Content Include="client\public\app\modules\dashboard\dashboard.html" />
     <Content Include="client\public\app\modules\layout\shell.html" />
     <Content Include="client\public\app\modules\layout\top-navi.html" />
+    <Compile Include="client\public\app\modules\core\constants.js" />
     <Compile Include="client\public\app\modules\services\auth.services.js" />
     <Content Include="client\public\app\stylesheets\bootstrap.css" />
     <Content Include="client\public\app\stylesheets\bootstrap.css.map" />
