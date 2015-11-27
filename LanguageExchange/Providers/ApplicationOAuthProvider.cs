@@ -33,7 +33,7 @@ namespace LanguageExchange.Providers
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
-
+            
             if (user == null)
             { 
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
@@ -66,15 +66,45 @@ namespace LanguageExchange.Providers
             return Task.FromResult<object>(null);
         }
 
-        public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+        public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
+            string clientId = string.Empty;
+            string clientSecret = string.Empty;
+
+            ApplicationClientManager cm = ApplicationClientManager.Create(context.OwinContext);
+            Client client = null;
+            
+            if (!context.TryGetBasicCredentials(out clientId, out clientSecret))
+            {
+                context.TryGetFormCredentials(out clientId, out clientSecret);
+            }
             // Resource owner password credentials does not provide a client ID.
             if (context.ClientId == null)
             {
                 context.Validated();
+                return;
             }
 
-            return Task.FromResult<object>(null);
+            client = await cm.FindClient(clientId, clientSecret);
+            if (client == null)
+            {
+                context.SetError("invalid_client", "No Client");
+                return;
+            }
+
+            if(!client.Active)
+            {
+                context.SetError("invalid_client", "Not Active");
+                return;
+            }
+
+            context.OwinContext.Set("as:AllowedOrigin", client.AllowedOrigin);
+            context.OwinContext.Set("as:RefreshTokenLifetime", client.RefreshTokenLifeTime);
+            context.OwinContext.Set("as:Scope", client.Scope);
+
+            context.Validated();
+
+            return;
         }
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)

@@ -13,7 +13,7 @@ namespace LanguageExchange.Security.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201511140525394_initial"; }
+            get { return "201511272323221_initial"; }
         }
         
         string IMigrationMetadata.Source

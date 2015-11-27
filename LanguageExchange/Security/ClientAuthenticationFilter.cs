@@ -62,7 +62,15 @@ namespace LanguageExchange.Security
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             HttpRequestMessage request = context.Request;
-            AuthenticationHeaderValue authorization = request.Headers.Authorization;
+            var scopeToken = request.Headers.FirstOrDefault(k => k.Key == "x-api-scope");
+            var token = scopeToken.Value.First().Split(' ');
+
+            //Token is not in the Bearer XXXX format
+            if (token == null || token.Length != 2)
+            {
+                return;
+            }
+            AuthenticationHeaderValue authorization = new AuthenticationHeaderValue(token[0], token[1]);
 
             // 2. If there are no credentials, do nothing.
             if (authorization == null)
@@ -72,8 +80,9 @@ namespace LanguageExchange.Security
 
             // 3. If there are credentials but the filter does not recognize the 
             //    authentication scheme, do nothing.
-            if (authorization.Scheme != "Bearer")
+            if (authorization.Scheme != "Scope")
             {
+                context.ErrorResult = new AuthenticationFailureResult("Unrecognized credentials.", request);
                 return;
             }
 
@@ -87,17 +96,25 @@ namespace LanguageExchange.Security
 
             var claimsList = await ValidateToken(authorization.Parameter);
 
-            ClaimsIdentity ident = new ClaimsIdentity(claimsList);
-            IPrincipal principal = new ClaimsPrincipal(ident);
-
-            if(principal == null)
+            if(claimsList == null)
             {
                 context.ErrorResult = new AuthenticationFailureResult("Invalid username or password", request);
             }
             else
             {
-                context.Principal = principal;
+                ClaimsIdentity ident = new ClaimsIdentity(claimsList);
+                IPrincipal principal = new ClaimsPrincipal(ident);
+
+                if (principal == null)
+                {
+                    context.ErrorResult = new AuthenticationFailureResult("Invalid username or password", request);
+                }
+                else
+                {
+                    context.Principal = principal;
+                }
             }
+
         }
 
         public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)

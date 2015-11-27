@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AESGCM.cs" />
     <Compile Include="Encryptor.cs" />
+    <Compile Include="Hasher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

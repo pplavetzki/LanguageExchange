@@ -85,32 +85,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationClientManager.cs" />
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="ApplicationUserStore.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="IApplicationUserStore.cs" />
-    <Compile Include="Migrations\201511140525394_initial.cs" />
-    <Compile Include="Migrations\201511140525394_initial.Designer.cs">
-      <DependentUpon>201511140525394_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201511272323221_initial.cs" />
+    <Compile Include="Migrations\201511272323221_initial.Designer.cs">
+      <DependentUpon>201511272323221_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RefreshToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511140525394_initial.resx">
-      <DependentUpon>201511140525394_initial.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\LanguageExchange.Common\LanguageExchange.Common.csproj">
+      <Project>{5e8c616f-f985-4c86-9bd5-cc5de426fb57}</Project>
+      <Name>LanguageExchange.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LanguageExchange.Services\LanguageExchange.Services.csproj">
       <Project>{26616096-4389-4dfa-9646-fef3d0c5b6aa}</Project>
       <Name>LanguageExchange.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511272323221_initial.resx">
+      <DependentUpon>201511272323221_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
