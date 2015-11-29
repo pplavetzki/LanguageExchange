@@ -8,6 +8,7 @@ var angular = require('angular'); //
 require('./modules/core');
 require('./modules/dashboard'); //
 require('./modules/layout');
+require('./modules/information');
 require('./modules/auth');
 require('./modules/widgets');
 require('./modules/services');
@@ -18,7 +19,12 @@ function setup($rootScope, $location, $window){
 
     $rootScope.$on("$locationChangeStart", function (event, next, current) {
         //Do your things
-        if("/" != $location.$$path && "/login" != $location.$$path && "/registration" != $location.$$path && "/confirm" != $location.$$path){
+        if ("/" != $location.$$path && 
+            "/login" != $location.$$path && 
+            "/registration" != $location.$$path && 
+            "/confirm" != $location.$$path &&
+            "/reconfirm" != $location.$$path &&
+            "/404" != $location.$$path) {
             if (!$window.sessionStorage.token || window.sessionStorage.token === "null") {
                 $location.path('/login');
             }
@@ -37,6 +43,7 @@ angular
         .module('app', ['app.core',
                        'app.auth',
                        'app.dashboard',
+                       'app.information',
                        'app.layout',
                        'app.widgets',
                        'app.services'

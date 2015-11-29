@@ -278,6 +278,35 @@ namespace LanguageExchange.Controllers
 
         }
 
+        [AllowAnonymous]
+        [Route("ReconfirmEmail")]
+        [HttpGet]
+        public async Task<IHttpActionResult> ReconfirmEmail(string userName)
+        {
+            if (string.IsNullOrEmpty(userName))
+            {
+                return BadRequest("Missing Data.");
+            }
+            var user = await UserManager.FindByNameAsync(userName);
+
+            if(user == null)
+            {
+                return BadRequest("Missing User.");
+            }
+
+            var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            var encodedToken = HttpUtility.UrlEncode(code);
+
+            string callback = "http://localhost:9095/confirm?userId={0}&code={1}";
+
+            var url = string.Format(callback, user.Id, encodedToken);
+            string message = "Please click this link or paste into a browser: <a href='" + url + "'>" + url + "</a>";
+
+            await UserManager.EmailService.SendAsync(new IdentityMessage() { Subject = "Language Exchange Confirmation", Destination = user.Email, Body = message });
+
+            return Ok();
+        }
+
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]

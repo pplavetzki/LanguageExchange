@@ -27,6 +27,11 @@ function Login ($timeout, $window, $state, $scope, authServices) {
                     $window.sessionStorage.token = data.access_token;
                     $state.go('app.dashboard.greetings');
                 }
+                else {
+                    if (data.error_description == 'Email is invalid.') {
+                        $state.go('reconfirmation', { userName: vm.username });
+                    }
+                }
             });
         }
     }

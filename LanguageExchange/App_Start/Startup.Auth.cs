@@ -47,7 +47,7 @@ namespace LanguageExchange
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
-            app.UseResourceAuthorization(new LanguageExchangeAuthorization());
+            //app.UseResourceAuthorization(new LanguageExchangeAuthorization());
             app.UseScopeAuthentication(new ScopeAuthorizationManager());
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(

@@ -10,10 +10,25 @@ function authServices($http, constants) {
 
     var service = {
         confirmEmail: confirmEmail,
-        authorize: authorize
+        authorize: authorize,
+        reconfirmEmail: reconfirmEmail
     };
 
     return service;
+    
+    function reconfirmEmail(userName) {
+        return $http.get(constants.apiBaseUrl + 'account/reconfirmEmail?userName=' + userName)
+            .then(complete)
+            .catch(failed);
+        
+        function complete(response) {
+            return response.data;
+        }
+        
+        function failed(error) {
+            return console.log(error);
+        }
+    }
 
     function confirmEmail(userId, code) {
     	return $http.get(constants.apiBaseUrl + 'account/confirm?userId=' + userId + '&code=' + encodeURIComponent(code))

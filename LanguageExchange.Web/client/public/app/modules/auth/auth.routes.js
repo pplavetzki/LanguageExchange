@@ -49,7 +49,20 @@ function getStates() {
                     }
                 }
             }
-    }];
+        }, {
+            state: 'reconfirmation',
+            config: {
+                url: '/reconfirm?userName',
+                views: {
+                    root: {
+                        templateUrl: 'views/modules/auth/reconfirmation.html',
+                        controller: 'Reconfirmation',
+                        controllerAs: 'vm',
+                        title: "Reconfirmation"
+                    }
+                }
+            }
+        }];
 }
 
 onRun.$inject = ['routeHelper'];

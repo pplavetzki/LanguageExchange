@@ -10,7 +10,7 @@ function getStates() {
     return [{
         state: 'app.dashboard',
         config: {
-            url: '/',
+            url: '/dashboard',
             title: 'Dashboard',
             views:{
                 "content@app": {
@@ -26,11 +26,9 @@ function getStates() {
                 url: 'dashboard/greetings',
                 title: 'Greetings',
                 views: {
-                    "content@app": {
                         templateUrl: 'views/modules/dashboard/greetings.html',
                         controller: 'Greetings',
                         controllerAs: 'vm'
-                    }
                 }
             }
         }];

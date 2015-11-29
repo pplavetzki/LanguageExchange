@@ -59,13 +59,14 @@ function login(data, callback) {
     };
     
     var req = http.request(options, function (res) {
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
+        //console.log('STATUS: ' + res.statusCode);
+        //console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             response += chunk;
         });
         res.on('end', function () {
+            console.log(response);
             callback(response);
         })
     });
@@ -74,6 +75,7 @@ function login(data, callback) {
         console.log('problem with request: ' + e.message);
     });
     
+
     // write data to request body
     req.write(postData);
     req.end();
@@ -135,7 +137,12 @@ function requestToken(callback) {
 app.post('/auth/login', function (req, res, next) {
     login(req.body, function (response) {
         var obj = JSON.parse(response);
-        res.json({ access_token: obj.access_token });
+        if (obj && obj.error) {
+            res.json(obj);
+        }
+        else {
+            res.json({ access_token: obj.access_token });
+        }
     });
 });
 

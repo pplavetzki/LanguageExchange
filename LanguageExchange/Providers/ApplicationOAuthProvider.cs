@@ -31,6 +31,7 @@ namespace LanguageExchange.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            string userId = "";
 
             string scope = context.OwinContext.Get<string>("as:Scope");
             string allowedOrigin = context.OwinContext.Get<string>("as:AllowedOrigin");
@@ -41,17 +42,30 @@ namespace LanguageExchange.Providers
                 return;
             }
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
-            
-            if (user == null)
-            { 
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                user = await userManager.FindByNameAsync(context.UserName);
-                if(user != null)
+            ApplicationUser user = await userManager.FindByNameAsync(context.UserName);
+           
+            if(user != null)
+            {
+                userId = user.Id;
+                if (!user.EmailConfirmed)
                 {
-                    await userManager.AccessFailedAsync(user.Id);
+                    context.SetError("invalid_grant", "Email is invalid.");
+                    return;
                 }
 
+                user = await userManager.FindAsync(context.UserName, context.Password);
+
+                if (user == null)
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    await userManager.AccessFailedAsync(userId);
+                  
+                    return;
+                }
+            }
+            else
+            {
+                context.SetError("invalid_grant", "The user is invalid.");
                 return;
             }
             
