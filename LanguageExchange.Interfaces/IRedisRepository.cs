@@ -13,5 +13,8 @@ namespace LanguageExchange.Interfaces
         Task InsertMostRecentUser(MostRecentUserDto user);
         Task<string[]> GetLanguages();
         Task<string[]> GetCountries();
+        Task InsertRefreshTokenAsync(RefreshTokenDto refreshToken);
+        Task<RefreshTokenDto> GetRefreshTokenAsync(string tokenId);
+        Task<bool> RemoveRefreshToken(string tokenId, string subject);
     }
 }

@@ -20,6 +20,36 @@ namespace LanguageExchange.Repository
             _redis = redis;
         }
 
+        public async Task InsertRefreshTokenAsync(RefreshTokenDto tokenDto)
+        {
+            IDatabase db = _redis.GetDatabase();
+            string refreshKey = "refresh:" + tokenDto.Subject;
+
+            var refreshValue = await db.StringGetAsync(refreshKey);
+            if (!string.IsNullOrEmpty(refreshValue))
+            {
+                await db.KeyDeleteAsync(refreshValue.ToString());
+            }
+            string userValue = await JsonConvert.SerializeObjectAsync(tokenDto);
+
+            await db.StringSetAsync(tokenDto.Id, userValue);
+            await db.StringSetAsync(refreshKey, tokenDto.Id);
+        }
+
+        public async Task<RefreshTokenDto> GetRefreshTokenAsync(string tokenId)
+        {
+            IDatabase db = _redis.GetDatabase();
+
+            var token = await db.StringGetAsync(tokenId);
+            if (string.IsNullOrEmpty(token))
+            {
+                return null;
+            }
+            var refreshToken = await JsonConvert.DeserializeObjectAsync<RefreshTokenDto>(token);
+
+            return refreshToken;
+        }
+
         public async Task InsertNewUser(UserDto user)
         {
             IDatabase db = _redis.GetDatabase();
@@ -58,6 +88,14 @@ namespace LanguageExchange.Repository
             var results = Array.ConvertAll<RedisValue, string>(countries, country => (string)country);
 
             return results;
+        }
+
+        public async Task<bool> RemoveRefreshToken(string tokenId, string subject)
+        {
+            IDatabase db = _redis.GetDatabase();
+
+            await db.KeyDeleteAsync("refresh:" + subject);
+            return await db.KeyDeleteAsync(tokenId);
         }
     }
 }

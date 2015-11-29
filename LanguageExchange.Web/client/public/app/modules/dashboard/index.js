@@ -7,5 +7,6 @@ var angular = require('angular');
 
 module.exports = angular.module('app.dashboard', ['app.core']);
 
+require('./greetings.controller');
 require('./dashboard.controller');
 require('./dashboard.routes');

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExchange", "LanguageExchange\LanguageExchange.csproj", "{07AF63C9-AE53-4B67-ADAA-D4EB813149D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExchange.MTS", "LanguageExchange\LanguageExchange.MTS.csproj", "{07AF63C9-AE53-4B67-ADAA-D4EB813149D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExchange.Interfaces", "LanguageExchange.Interfaces\LanguageExchange.Interfaces.csproj", "{3E23B3B4-A1CD-452D-83B9-9D4C43824775}"
 EndProject

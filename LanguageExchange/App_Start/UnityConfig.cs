@@ -1,5 +1,6 @@
 using LanguageExchange.Interfaces;
 using LanguageExchange.Models;
+using LanguageExchange.Providers;
 using LanguageExchange.Repository;
 using LanguageExchange.Security;
 using Microsoft.Azure.Documents;
@@ -40,6 +41,10 @@ namespace LanguageExchange
 
             container.RegisterType<IRedisRepository, RedisRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
+
+            var repo = container.Resolve<IRedisRepository>();
+
+            container.RegisterType<RefreshTokenProvider>(new InjectionConstructor(repo));
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

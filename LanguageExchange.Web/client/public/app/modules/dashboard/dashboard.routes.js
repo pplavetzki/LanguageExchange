@@ -20,7 +20,20 @@ function getStates() {
                 }
             }
         }
-    }];
+        }, {
+            state: 'app.dashboard.greetings',
+            config: {
+                url: 'dashboard/greetings',
+                title: 'Greetings',
+                views: {
+                    "content@app": {
+                        templateUrl: 'views/modules/dashboard/greetings.html',
+                        controller: 'Greetings',
+                        controllerAs: 'vm'
+                    }
+                }
+            }
+        }];
 }
 
 onRun.$inject = ['routeHelper'];

@@ -15,20 +15,19 @@ function Login ($timeout, $window, $state, $scope, authServices) {
     var vm = this;
 
     vm.submit = submit;
-    
-    authServices.authorize().then(function (data) {
-        if (data && data.token) {
-            vm.token = data.token;
-            console.log(vm.token);
-        }
-    });
 
     function submit() {
-        if($scope.loginform.$valid) {
-            if (vm.username === vm.password) {
-                $window.sessionStorage.token = 'let me in!';
-                $state.go('app.dashboard');
-            }
+        if ($scope.loginform.$valid) {
+            var data = {
+                password: vm.password,
+                userName: vm.username
+            };
+            authServices.authorize(data).then(function (data) {
+                if (data && data.access_token) {
+                    $window.sessionStorage.token = data.access_token;
+                    $state.go('app.dashboard.greetings');
+                }
+            });
         }
     }
 

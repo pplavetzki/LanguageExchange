@@ -29,8 +29,8 @@ function authServices($http, constants) {
         }
     }
 
-    function authorize() {
-        return $http.get(constants.appBaseUrl + 'auth/scope')
+    function authorize(data) {
+        return $http.post(constants.appBaseUrl + 'auth/login', data)
             .then(complete)
             .catch(failed);
         

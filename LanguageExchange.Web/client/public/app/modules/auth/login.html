@@ -3,10 +3,10 @@
         <form name="loginform" class="smart-form">
             <h1>Language Exchange</h1>
             <label class="input pt50">
-                <input type="text" class="input-lg" maxlength="200" placeholder="Username" />
+                <input type="text" class="input-lg" maxlength="200" placeholder="Username" ng-model="vm.username" />
             </label>
             <label class="input pt10">
-                <input type="password" class="input-lg" maxlength="200" placeholder="Password" />
+                <input type="password" class="input-lg" maxlength="200" placeholder="Password" ng-model="vm.password" />
             </label>
             <div class="login-footer pt15">
                 <a ng-click="vm.submit();" class="button blue">Login</a>
