@@ -15,9 +15,9 @@ namespace LanguageExchange.Security.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-
-            if (System.Diagnostics.Debugger.IsAttached == false)
-                System.Diagnostics.Debugger.Launch();
+            //update-database -StartUpProjectName LanguageExchange.MTS
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //    System.Diagnostics.Debugger.Launch();
         }
 
         private async Task Seed()
@@ -40,12 +40,12 @@ namespace LanguageExchange.Security.Migrations
 
             var user = new ApplicationUser()
             {
-                Firstname = "Paul",
-                Lastname = "Plavetzki",
+                FirstName = "Paul",
+                LastName = "Plavetzki",
                 Email = "paul@p2the3.com",
                 AccessFailedCount = 0,
                 EmailConfirmed = false,
-                JoinDate = DateTime.UtcNow,
+                JoinDate = DateTimeOffset.Now,
                 LockoutEnabled = false,
                 PhoneNumberConfirmed = false,
                 TwoFactorEnabled = false,
@@ -65,7 +65,7 @@ namespace LanguageExchange.Security.Migrations
                 Id = Guid.NewGuid().ToString(),
                 Name = "LangExApp",
                 Secret = Hasher.GetHash("6T9+akYtzZVwOztXmkso/Jrg0FvuEp0KdtZvQ+bFeLc="),
-                RefreshTokenLifeTime = 2400,
+                RefreshTokenLifeTime = 60,
                 AllowedOrigin = "*",
                 Scope = "full"
             };

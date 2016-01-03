@@ -7,6 +7,23 @@ body{
     padding:80px 0;
 }
 
+.registration-container {
+    max-width:325px;
+    padding:80px 0;
+}
+
+.registration-container h1 {
+    padding: 5px;
+}
+
+.registration-container h6 {
+    padding: 5px;
+}
+
+.registration-container input.input-lg {
+    margin: 10px 0;
+}
+
 .mainpage-container {
     padding: 80px 0;
 }

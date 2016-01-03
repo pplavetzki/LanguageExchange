@@ -307,6 +307,36 @@ namespace LanguageExchange.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
+        [Route("QuickRegister")]
+        public async Task<IHttpActionResult> QuickRegister(RegisterUserDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if(model == null)
+            {
+                return BadRequest();
+            }
+
+            var user = new ApplicationUser()
+            {
+                UserName = model.UserName,
+                Email = model.Email,
+                JoinDate = DateTime.UtcNow
+            };
+
+            await UserManager.QuickRegistration(user, model.Password);
+
+            var ret = new
+            {
+                success = true
+            };
+
+            return Ok(ret);
+        }
+
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
@@ -323,8 +353,8 @@ namespace LanguageExchange.Controllers
             {
                 UserName = model.Username,
                 Email = model.Email,
-                Firstname = model.Firstname,
-                Lastname = model.Lastname,
+                FirstName = model.Firstname,
+                LastName = model.Lastname,
                 JoinDate = DateTime.UtcNow
             };
 

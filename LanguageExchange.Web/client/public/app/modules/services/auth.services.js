@@ -11,7 +11,8 @@ function authServices($http, constants) {
     var service = {
         confirmEmail: confirmEmail,
         authorize: authorize,
-        reconfirmEmail: reconfirmEmail
+        reconfirmEmail: reconfirmEmail,
+        quickRegister: quickRegister
     };
 
     return service;
@@ -35,6 +36,20 @@ function authServices($http, constants) {
             .then(complete)
             .catch(failed);
 
+        function complete(response) {
+            return response.data;
+        }
+        
+        function failed(error) {
+            return console.log(error);
+        }
+    }
+    
+    function quickRegister(data) {
+        return $http.post(constants.apiBaseUrl + 'account/quickregister', data)
+            .then(complete)
+            .catch(failed);
+        
         function complete(response) {
             return response.data;
         }

@@ -1,34 +1,30 @@
-﻿<div class="container form-container">
+﻿<div class="container registration-container">
     <div class="text-center">
-        <!--
-        <form name="registrationForm" class="smart-form">
-            <div class="row">
-                <section class="col col-6">
-                    <label class="input">
-                        <input class="input-lg" type="text" name="firstname" placeholder="First name">
-                    </label>
-                </section>
-                <section class="col col-6">
-                    <label class="input">
-                        <input class="input-lg" type="text" name="lastname" placeholder="Last name">
-                    </label>
-                </section>
-            </div>
-            <div class="row">
-                <section class="col col-6">
-                    <label class="input">
-                        <input class="input-lg" type="text" name="email" placeholder="Email">
-                    </label>
-                </section>
-                <section class="col col-6">
-                    <label class="input">
-                        <input class="input-lg" type="text" name="confirmEmail" placeholder="Confirm Email">
-                    </label>
-                </section>
+        
+        <form novalidate="novalidate" name="registrationForm" class="smart-form">
+            <h1>Language Exchange</h1>
+            <h6>Quick Registration</h6>
+            <label class="input">
+                <input ng-model="vm.userName" class="input-lg" type="text" name="userName" placeholder="User Name">
+            </label>
+
+            <label class="input">
+                <input ng-model="vm.email" class="input-lg" type="email" name="email" placeholder="Email">
+            </label>
+
+            <label class="input">
+                <input ng-model="vm.password" class="input-lg" type="password" name="password" placeholder="Password">
+            </label>
+            <div class="login-footer pt15">
+                <a ng-click="vm.submit();" class="button blue">Register</a>
+                <a class="button white">Cancel</a>
+                <!--<button ng-click="vm.submit();" type="submit" class="btn btn-primary">Login</button>-->
+                <!--<button type="button" class="btn btn-default">Cancel</button>-->
             </div>
         </form>
-        -->
-        <form novalidate="novalidate" data-smart-validate-form="" class="ng-pristine ng-valid">
+        
+
+        <!--<form novalidate="novalidate" data-smart-validate-form="" class="ng-pristine ng-valid">
             <div class="col-sm-12 ng-isolate-scope" data-smart-wizard="" data-smart-wizard-callback="wizard1CompleteCallback">
                 <div class="form-bootstrapWizard clearfix">
                     <ul class="bootstrapWizard">
@@ -452,6 +448,6 @@
 
                 </div>
             </div>
-        </form>
+        </form>-->
     </div>
 </div>

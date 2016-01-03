@@ -77,6 +77,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -92,9 +93,9 @@
     <Compile Include="ApplicationUserStore.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="IApplicationUserStore.cs" />
-    <Compile Include="Migrations\201511272323221_initial.cs" />
-    <Compile Include="Migrations\201511272323221_initial.Designer.cs">
-      <DependentUpon>201511272323221_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201601030341264_initial.cs" />
+    <Compile Include="Migrations\201601030341264_initial.Designer.cs">
+      <DependentUpon>201601030341264_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,8 +116,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511272323221_initial.resx">
-      <DependentUpon>201511272323221_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601030341264_initial.resx">
+      <DependentUpon>201601030341264_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

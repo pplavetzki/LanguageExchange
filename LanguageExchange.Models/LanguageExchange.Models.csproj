@@ -90,6 +90,7 @@
     <Compile Include="Dtos\MRLanguageDetailDto.cs" />
     <Compile Include="Dtos\MostRecentUserDto.cs" />
     <Compile Include="Dtos\RefreshTokenDto.cs" />
+    <Compile Include="Dtos\RegisterUserDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LanguageDetail.cs" />

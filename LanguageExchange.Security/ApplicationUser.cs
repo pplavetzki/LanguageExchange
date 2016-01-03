@@ -9,12 +9,12 @@ namespace LanguageExchange.Security
 {
     public class ApplicationUser : IdentityUser
     {
+        [MaxLength(50)]
+        public string FirstName { get; set; }
+        [MaxLength(50)]
+        public string LastName { get; set; }
         [Required]
-        public string Firstname { get; set; }
-        [Required]
-        public string Lastname { get; set; }
-        [Required]
-        public DateTime JoinDate { get; set; }
+        public DateTimeOffset JoinDate { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager, string authType)
         {

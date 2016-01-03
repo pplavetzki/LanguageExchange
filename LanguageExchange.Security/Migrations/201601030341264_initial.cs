@@ -62,9 +62,9 @@ namespace LanguageExchange.Security.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Firstname = c.String(nullable: false),
-                        Lastname = c.String(nullable: false),
-                        JoinDate = c.DateTime(nullable: false),
+                        FirstName = c.String(maxLength: 50),
+                        LastName = c.String(maxLength: 50),
+                        JoinDate = c.DateTimeOffset(nullable: false, precision: 7),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
