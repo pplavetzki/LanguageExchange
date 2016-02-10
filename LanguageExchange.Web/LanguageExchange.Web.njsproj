@@ -31,6 +31,45 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="client\build\app\data\countries.json" />
+    <Content Include="client\build\app\data\states.json" />
+    <Content Include="client\build\app\fonts\fontawesome-webfont.eot" />
+    <Content Include="client\build\app\fonts\fontawesome-webfont.svg" />
+    <Content Include="client\build\app\fonts\fontawesome-webfont.ttf" />
+    <Content Include="client\build\app\fonts\fontawesome-webfont.woff" />
+    <Content Include="client\build\app\fonts\FontAwesome.otf" />
+    <Content Include="client\build\app\fonts\fontawesome4.2\fontawesome-webfont.eot" />
+    <Content Include="client\build\app\fonts\fontawesome4.2\fontawesome-webfont.svg" />
+    <Content Include="client\build\app\fonts\fontawesome4.2\fontawesome-webfont.ttf" />
+    <Content Include="client\build\app\fonts\fontawesome4.2\fontawesome-webfont.woff" />
+    <Content Include="client\build\app\fonts\fontawesome4.2\FontAwesome.otf" />
+    <Content Include="client\build\app\fonts\fontawesome4.2\readme.txt" />
+    <Content Include="client\build\app\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="client\build\app\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="client\build\app\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="client\build\app\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="client\build\app\index.html" />
+    <Content Include="client\build\app\stylesheets\bootstrap.css" />
+    <Content Include="client\build\app\stylesheets\bootstrap.css.map" />
+    <Content Include="client\build\app\stylesheets\demo.css" />
+    <Content Include="client\build\app\stylesheets\font-awesome.css" />
+    <Content Include="client\build\app\stylesheets\invoice.css" />
+    <Content Include="client\build\app\stylesheets\lockscreen.css" />
+    <Content Include="client\build\app\stylesheets\smartadmin-production-plugins.css" />
+    <Content Include="client\build\app\stylesheets\smartadmin-production.css" />
+    <Content Include="client\build\app\stylesheets\smartadmin-rtl.css" />
+    <Content Include="client\build\app\stylesheets\smartadmin-skins.css" />
+    <Content Include="client\build\app\stylesheets\stylesheet.css" />
+    <Content Include="client\build\app\views\modules\auth\confirmation.html" />
+    <Content Include="client\build\app\views\modules\auth\login.html" />
+    <Content Include="client\build\app\views\modules\auth\reconfirmation.html" />
+    <Content Include="client\build\app\views\modules\auth\registration.html" />
+    <Content Include="client\build\app\views\modules\core\404.html" />
+    <Content Include="client\build\app\views\modules\dashboard\dashboard.html" />
+    <Content Include="client\build\app\views\modules\dashboard\greetings.html" />
+    <Content Include="client\build\app\views\modules\information\info.html" />
+    <Content Include="client\build\app\views\modules\layout\shell.html" />
+    <Content Include="client\build\app\views\modules\layout\top-navi.html" />
     <Content Include="client\node_modules\angular-bootstrap\.idea\bootstrap-bower-upstream.iml" />
     <Content Include="client\node_modules\angular-bootstrap\.idea\misc.xml" />
     <Content Include="client\node_modules\angular-bootstrap\.idea\modules.xml" />
@@ -106,6 +145,7 @@
     <Content Include="client\public\app\modules\core\404.html" />
     <Content Include="client\public\app\modules\dashboard\dashboard.html" />
     <Content Include="client\public\app\modules\dashboard\greetings.html" />
+    <Compile Include="client\build\app\bundle.js" />
     <Compile Include="client\public\app\modules\information\info.controller.js" />
     <Compile Include="client\public\app\modules\information\info.routes.js" />
     <Content Include="client\public\app\modules\information\info.html" />
@@ -965,6 +1005,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="client\" />
+    <Folder Include="client\build\" />
+    <Folder Include="client\build\app\" />
+    <Folder Include="client\build\app\data\" />
+    <Folder Include="client\build\app\fonts\" />
+    <Folder Include="client\build\app\fonts\fontawesome4.2\" />
+    <Folder Include="client\build\app\stylesheets\" />
+    <Folder Include="client\build\app\views\" />
+    <Folder Include="client\build\app\views\modules\" />
+    <Folder Include="client\build\app\views\modules\auth\" />
+    <Folder Include="client\build\app\views\modules\core\" />
+    <Folder Include="client\build\app\views\modules\dashboard\" />
+    <Folder Include="client\build\app\views\modules\information\" />
+    <Folder Include="client\build\app\views\modules\layout\" />
     <Folder Include="client\node_modules\" />
     <Folder Include="client\node_modules\angular-bootstrap\" />
     <Folder Include="client\node_modules\angular-bootstrap\.idea\" />
