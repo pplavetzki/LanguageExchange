@@ -33,6 +33,7 @@
   <ItemGroup>
     <Content Include="client\build\app\data\countries.json" />
     <Content Include="client\build\app\data\states.json" />
+    <Content Include="client\build\app\favicon.ico" />
     <Content Include="client\build\app\fonts\fontawesome-webfont.eot" />
     <Content Include="client\build\app\fonts\fontawesome-webfont.svg" />
     <Content Include="client\build\app\fonts\fontawesome-webfont.ttf" />
