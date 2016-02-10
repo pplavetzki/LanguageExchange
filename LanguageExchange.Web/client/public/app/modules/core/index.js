@@ -7,6 +7,7 @@ var angular = require('angular');
 
 require('angular-ui-router');
 require('angular-bootstrap');
+require('kendo');
 
 module.exports = angular.module('app.core', ['ui.router', 'ui.bootstrap']);
 

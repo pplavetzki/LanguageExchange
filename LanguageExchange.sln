@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExchange.MTS", "LanguageExchange\LanguageExchange.MTS.csproj", "{07AF63C9-AE53-4B67-ADAA-D4EB813149D2}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExchange.Models", "LanguageExchange.Models\LanguageExchange.Models.csproj", "{071148C0-8F20-44A3-93F1-78A7B78E97A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExchange.Repository", "LanguageExchange.Repository\LanguageExchange.Repository.csproj", "{97BF15F7-221B-4F4F-8B23-3BAC2E12FE29}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExchange.DataLayer", "LanguageExchange.DataLayer\LanguageExchange.DataLayer.csproj", "{F7733CDC-5F2B-4F64-86EE-370B0AD8EF69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExchange.Common", "LanguageExchange.Common\LanguageExchange.Common.csproj", "{5E8C616F-F985-4C86-9BD5-CC5DE426FB57}"
 EndProject
@@ -45,9 +43,6 @@ Global
 		{97BF15F7-221B-4F4F-8B23-3BAC2E12FE29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97BF15F7-221B-4F4F-8B23-3BAC2E12FE29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97BF15F7-221B-4F4F-8B23-3BAC2E12FE29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7733CDC-5F2B-4F64-86EE-370B0AD8EF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7733CDC-5F2B-4F64-86EE-370B0AD8EF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7733CDC-5F2B-4F64-86EE-370B0AD8EF69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E8C616F-F985-4C86-9BD5-CC5DE426FB57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E8C616F-F985-4C86-9BD5-CC5DE426FB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E8C616F-F985-4C86-9BD5-CC5DE426FB57}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1033,6 +1033,7 @@
     <Folder Include="client\public\app\modules\information\" />
     <Folder Include="client\public\app\modules\services\" />
     <Folder Include="client\public\app\modules\widgets\" />
+    <Folder Include="client\public\app\vendor\" />
     <Folder Include="client\public\app\stylesheets\" />
     <Folder Include="server\" />
     <Folder Include="server\node_modules\" />

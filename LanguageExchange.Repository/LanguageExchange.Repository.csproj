@@ -101,10 +101,6 @@
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LanguageExchange.DataLayer\LanguageExchange.DataLayer.csproj">
-      <Project>{f7733cdc-5f2b-4f64-86ee-370b0ad8ef69}</Project>
-      <Name>LanguageExchange.DataLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LanguageExchange.Interfaces\LanguageExchange.Interfaces.csproj">
       <Project>{3e23b3b4-a1cd-452d-83b9-9d4c43824775}</Project>
       <Name>LanguageExchange.Interfaces</Name>
